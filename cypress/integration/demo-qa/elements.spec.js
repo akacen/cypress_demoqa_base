@@ -1,6 +1,7 @@
 import ButtonsPage from "../../pageObjects/ButtonsPage";
 import CheckBoxPage from "../../pageObjects/CheckBoxPage";
 import RadioButtonPage from "../../pageObjects/RadioButtonPage";
+import SelectablePage from "../../pageObjects/SelectablePage";
 import TextBoxPage from "../../pageObjects/textBoxPage";
 import WebTablesPage from "../../pageObjects/WebTablesPage";
 
@@ -167,12 +168,12 @@ context("Elements Page", () => {
     })
   });
 
-  context("Radio Button scenarios", () => {
+  context("Special Button scenarios", () => {
     beforeEach(() => {
       ButtonsPage.visit();
     });
 
-    it.only("Click all the buttons", () => {
+    it("Click all the buttons", () => {
       //Click double click
       ButtonsPage.doubleClickButton.dblclick();
       //Validate 
@@ -189,4 +190,33 @@ context("Elements Page", () => {
 
     });
   });
+
+  context("Selectable scenarios", () => {
+    beforeEach(() => {
+      SelectablePage.visit();
+    });
+
+    it.only("Click fields", () => {
+      //Click fields “Cras justo odio” and “Morbi leo risus”.
+      SelectablePage.findField("Cras justo odio").click();
+      SelectablePage.findField("Morbi leo risus").click();
+      //validate changed state
+
+      //validate that others didn't change
+    });
+
+    it("Click grid fields", () => {
+      //Open "Grid"
+      SelectablePage.gridTab.click();
+      // Click “Two”, “Four”, “Six” and “Eight”
+      SelectablePage.findField("Two").click();
+      SelectablePage.findField("Four").click();
+      SelectablePage.findField("Six").click();
+      SelectablePage.findField("Eight").click();
+
+      //validate changes
+      //validate other fields
+    });
+  });
+
 });
