@@ -196,16 +196,19 @@ context("Elements Page", () => {
       SelectablePage.visit();
     });
 
-    it.only("Click fields", () => {
+    it("Click fields", () => {
       //Click fields “Cras justo odio” and “Morbi leo risus”.
       SelectablePage.findField("Cras justo odio").click();
       SelectablePage.findField("Morbi leo risus").click();
       //validate changed state
-
+      SelectablePage.findField("Cras justo odio").should("have.class", "active");
+      SelectablePage.findField("Morbi leo risus").should("have.class", "active");
       //validate that others didn't change
+      SelectablePage.findField("Dapibus ac facilisis in").should("not.have.class", "active");
+      SelectablePage.findField("Porta ac consectetur ac").should("not.have.class", "active");
     });
 
-    it("Click grid fields", () => {
+    it.only("Click grid fields", () => {
       //Open "Grid"
       SelectablePage.gridTab.click();
       // Click “Two”, “Four”, “Six” and “Eight”
@@ -215,7 +218,18 @@ context("Elements Page", () => {
       SelectablePage.findField("Eight").click();
 
       //validate changes
+      SelectablePage.findField("Two").should("have.class", "active");
+      SelectablePage.findField("Four").should("have.class", "active");
+      SelectablePage.findField("Six").should("have.class", "active");
+      SelectablePage.findField("Eight").should("have.class", "active");
       //validate other fields
+      SelectablePage.findField("One").should("not.have.class", "active");
+      SelectablePage.findField("Three").should("not.have.class", "active");
+      SelectablePage.findField("Five").should("not.have.class", "active");
+      SelectablePage.findField("Seven").should("not.have.class", "active");
+      SelectablePage.findField("Nine").should("not.have.class", "active");
+
+
     });
   });
 
